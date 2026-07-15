@@ -10,8 +10,8 @@ import asyncio
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logging.info(f"[INIT] Iniciando ciclo de vida da aplicação")
     load_dotenv()
     await init_db()
+    logging.info(f"[INIT] Iniciando ciclo de vida da aplicação")
     yield
-    
+    logging.info(f"[ENDING] Encerrando ciclo de vida da aplicação")

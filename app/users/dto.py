@@ -1,3 +1,3 @@
 class UserDTO():
-    nome: str
+    email: str
     senha: str
