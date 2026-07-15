@@ -1,9 +1,8 @@
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from ..users.repository import UserRepository
-
-from ..models.user_model import User
+from app.users.repository import UserRepository
+from app.models.user_model import User
 
 @pytest.mark.asyncio
 async def test_create_user():

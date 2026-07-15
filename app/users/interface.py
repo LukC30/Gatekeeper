@@ -13,7 +13,7 @@ class BaseUserRepository(ABC):
         pass
 
     @abstractmethod
-    async def get_by_email(self, user: User):
+    async def get_by_email(self, email: str):
         pass
     
     @abstractmethod

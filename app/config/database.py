@@ -8,14 +8,15 @@ import os
 load_dotenv()
 
 DB_USER = os.getenv("USER_DB")
-DB_PASSWORD = os.getenv("PASSWORD")
+DB_PASSWORD = os.getenv("PASSWORD", "")
 DB_PORT = os.getenv("PORT")
 DB_HOST = os.getenv("HOST")
 DB_NAME = os.getenv("DATABASE")
 
 
-DATABASE_URL = f"mysql+aiomysql://{DB_NAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"mysql+aiomysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
+print(DATABASE_URL)
 engine = create_async_engine(
     DATABASE_URL,
     echo=True,

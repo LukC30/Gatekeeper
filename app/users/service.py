@@ -12,5 +12,9 @@ class UserService():
         user_model = UserMapper.to_user_model(user_dto)
         result = await self.user_repo.create(user_model)
         return result
+    
+    async def get_by_email(self, email: str):
+        result = await self.user_repo.get_by_email(email)
+        return result
 
     

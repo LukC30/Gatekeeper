@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from app.config.lifespan import lifespan
 from dotenv import load_dotenv
 
+from app.users.router import router as user_router
+
 import uvicorn
 
 api = FastAPI(
@@ -12,7 +14,9 @@ api = FastAPI(
     lifespan=lifespan
 )
 
-@api.get("/test")
+api.include_router(user_router)
+
+@api.get("/")
 def test_route():
     return {"message": "initializing..."}
 

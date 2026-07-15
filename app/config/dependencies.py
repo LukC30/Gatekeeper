@@ -13,4 +13,4 @@ def get_user_repo() -> UserRepository:
     return UserRepository(get_engine_database())
 
 def get_user_service() -> UserService:
-    return UserService(get_user_repo)
+    return UserService(get_user_repo())

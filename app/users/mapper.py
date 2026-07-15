@@ -1,5 +1,6 @@
 from app.models.user_model import User
 from app.users.dto import UserDTO
+from concurrent.futures import ThreadPoolExecutor
 
 class UserMapper():
     @staticmethod

@@ -11,10 +11,13 @@ class UserRepository(BaseUserRepository):
         async with self.async_session_factory.begin() as session:
             session.add(user_model)
             await session.commit()
+        return user_model
+        
 
     async def get_by_email(self, email: str):
         async with self.async_session_factory.begin() as session:
             model = await session.execute(select(User).where(User.email == email))
+            print(model)
             return model
 
 
