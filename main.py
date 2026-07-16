@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.config.lifespan import lifespan
 from dotenv import load_dotenv
@@ -11,8 +12,18 @@ api = FastAPI(
     description="it is the main guardian of your application.",
     title="Gatekeeper",
     version="0.01",
-    lifespan=lifespan
+    lifespan=lifespan,
+
 )
+
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 
 api.include_router(user_router)
 

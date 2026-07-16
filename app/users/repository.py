@@ -16,7 +16,7 @@ class UserRepository(BaseUserRepository):
 
     async def get_by_email(self, email: str):
         async with self.async_session_factory.begin() as session:
-            model = await session.execute(select(User).where(User.email == email))
+            model = (await session.execute(select(User).where(User.email == email))).scalar_one_or_none()
             print(model)
             return model
 
