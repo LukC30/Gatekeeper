@@ -1,7 +1,7 @@
 from .interface import BaseUserRepository
 from app.models.user_model import User
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, update
 
 class UserRepository(BaseUserRepository):
     def __init__(self, async_session_factory):
@@ -23,5 +23,10 @@ class UserRepository(BaseUserRepository):
 
     async def update(self, id: int, user_model: User):
         async with self.async_session_factory.begin() as session:
-            model = await session.execute(select(User).where(User.id == user_model.id))
+            result = (await session.scalars(
+                update(User)
+                .where(User.id == id)
+                .values(email=user_model.email, senha=user_model.senha)
+            )).one_or_none()
 
+            return result

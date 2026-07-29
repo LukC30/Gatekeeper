@@ -17,4 +17,17 @@ class UserService():
         result = await self.user_repo.get_by_email(email)
         return result
 
-    
+    async def update(self, id, user_dto: UserDTO):
+        user_comparative = await self.user_repo.get_by_email(user_dto.email)
+        if user_comparative is None:
+            return None
+
+        if user_comparative.id != id:
+            return None
+
+        user_dto.senha = encrypt_password(user_dto.senha)
+        user_model = UserMapper.to_user_model(user_dto)
+        model = await self.user_repo.update(id, user_model)
+
+        return model
+        
