@@ -18,6 +18,14 @@ async def create_user(user_dto: UserDTO, user_service: UserService = Depends(get
 
     return result
 
+@router.get('/{id}', status_code=200)
+async def get_by_id(id: int, user_service: UserService = Depends(get_user_service)):
+    result: User = await user_service.get_by_id(id)
+    if result is None:
+        return {"success": False}
+
+    return result.model_dump()
+
 @router.get("/{email}", status_code=200)
 async def get_user_by_email(email: str, user_service: UserService = Depends(get_user_service)):
     result: User = await user_service.get_by_email(email)

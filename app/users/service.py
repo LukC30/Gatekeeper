@@ -17,6 +17,10 @@ class UserService():
         result = await self.user_repo.get_by_email(email)
         return result
 
+    async def get_by_id(self, id: int):
+        result = await self.user_repo.get_by_id(id)
+        return result
+
     async def update(self, id, user_dto: UserDTO):
         user_comparative = await self.user_repo.get_by_email(user_dto.email)
         if user_comparative is None:

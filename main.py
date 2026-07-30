@@ -13,7 +13,6 @@ api = FastAPI(
     title="Gatekeeper",
     version="0.01",
     lifespan=lifespan,
-
 )
 
 api.add_middleware(
