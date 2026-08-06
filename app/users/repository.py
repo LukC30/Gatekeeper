@@ -38,7 +38,7 @@ class UserRepository(BaseUserRepository):
 
     async def delete(self, id: int):
         async with self.async_session_factory.begin() as session:
-            (await session.scalars(
+            (await session.execute(
                 delete(User)
                 .where(User.id == id)
             ))

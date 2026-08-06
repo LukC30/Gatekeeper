@@ -14,9 +14,11 @@ class AuthService():
     async def login(self, user_dto: UserDTO):
         user_model: User = await self.user_repo.get_by_email(email=user_dto.email)
         if not (await asyncio.to_thread(verify_password, user_dto.senha, user_model.senha)):
-            return
-
+            print("passou por aqui")
+            return 
+        print("Passou por aqui também")
         user_response = await asyncio.to_thread(UserMapper.to_user_response, user_model)
+        print(user_response)
         token = await asyncio.to_thread(_generate_token, user_response.model_dump())
         return token
 

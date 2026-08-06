@@ -3,6 +3,7 @@ from typing import Optional
 
 class User(SQLModel, table=True):
     __tablename__ = "tbl_usuario"
+    __table_args__ = {"extend_existing": True}
 
     id: Optional[int] = Field(None, primary_key=True)
     email: str = Field(None, unique=True, nullable=False)

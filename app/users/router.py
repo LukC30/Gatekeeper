@@ -26,7 +26,7 @@ async def get_by_id(id: int, user_service: UserService = Depends(get_user_servic
 
     return result.model_dump()
 
-@router.get("/{email}", status_code=200)
+@router.get("/email/{email}", status_code=200)
 async def get_user_by_email(email: str, user_service: UserService = Depends(get_user_service)):
     result: User = await user_service.get_by_email(email)
     if result is None:
@@ -41,3 +41,8 @@ async def update_user(id: int, user_dto: UserDTO, user_service: UserService = De
         return {"success": False}    
     
     return result.model_dump()
+
+@router.delete('/{id}', status_code=200)
+async def delete_user(id: int, user_service: UserService = Depends(get_user_service)):
+    await user_service.delete(id)
+    return
