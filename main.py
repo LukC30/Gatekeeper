@@ -5,6 +5,7 @@ from app.config.lifespan import lifespan
 from dotenv import load_dotenv
 
 from app.users.router import router as user_router
+from app.auth.router import router as auth_router
 
 import uvicorn
 
@@ -25,6 +26,7 @@ api.add_middleware(
 
 
 api.include_router(user_router)
+api.include_router(auth_router)
 
 @api.get("/")
 def test_route():

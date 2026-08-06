@@ -3,6 +3,8 @@ from app.users.interface import BaseUserRepository
 from .mapper import UserMapper
 from ..utils.auth_utils import encrypt_password
 
+import asyncio
+
 class UserService():
     def __init__(self, user_repo: BaseUserRepository):
         self.user_repo = user_repo
@@ -34,4 +36,7 @@ class UserService():
         model = await self.user_repo.update(id, user_model)
 
         return model
-        
+
+    async def delete(self, id: int):
+        await self.user_repo.delete(id)
+        pass

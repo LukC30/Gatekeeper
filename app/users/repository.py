@@ -1,7 +1,7 @@
 from .interface import BaseUserRepository
 from app.models.user_model import User
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, update
+from sqlalchemy import select, update, delete
 
 class UserRepository(BaseUserRepository):
     def __init__(self, async_session_factory):
@@ -35,3 +35,12 @@ class UserRepository(BaseUserRepository):
             )).one_or_none()
 
             return result
+
+    async def delete(self, id: int):
+        async with self.async_session_factory.begin() as session:
+            (await session.scalars(
+                delete(User)
+                .where(User.id == id)
+            ))
+
+        return

@@ -23,3 +23,7 @@ class BaseUserRepository(ABC):
     @abstractmethod
     async def update(self, id: int, user: User):
         pass
+
+    @abstractmethod
+    async def delete(self, id):
+        pass
