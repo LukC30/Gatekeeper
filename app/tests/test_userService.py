@@ -1,4 +1,4 @@
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import AsyncMock
 import pytest
 from app.users.service import UserService
 from app.users.interface import BaseUserRepository
